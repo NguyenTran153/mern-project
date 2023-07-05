@@ -195,13 +195,13 @@ exports.userExport = async (req, res) => {
       }
     }
 
-    const writablestream = fs.createWriteStream(
+    const writeTableSteam = fs.createWriteStream(
       "public/files/export/users.csv"
     );
 
-    csvStream.pipe(writablestream);
+    csvStream.pipe(writeTableSteam);
 
-    writablestream.on("finish", function () {
+    writeTableSteam.on("finish", function () {
       res.json({
         downloadUrl: `${BASE_URL}/files/export/users.csv`,
       });
@@ -223,7 +223,7 @@ exports.userExport = async (req, res) => {
       });
     }
     csvStream.end();
-    writablestream.end();
+    writeTableSteam.end();
   } catch (error) {
     res.status(401).json(error);
   }
